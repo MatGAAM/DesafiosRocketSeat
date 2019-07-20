@@ -3,28 +3,26 @@ var listaElement = document.querySelector('#nome ul')
 var buttonElement = document.querySelector('#nome button')
 
 
-var vetorNomes = JSON.parse(localStorage.getItem('lista_nomes')) || [] // converte para string com JSON 
-                                                                       //ou caso esteja vazio inicia como vetor vazio
+var vetorNomes = JSON.parse(localStorage.getItem('lista_nomes')) || [] 
 
 
-function renderNomes(){ // function responsavel pelos elementos que aparecem na tela
-    listaElement.innerHTML = '' // limpa a lista antes de atualizar com novos elementos
-    for (nome of vetorNomes){ // le o vetor e joga os elementos na variavel nome
+function renderNomes(){ 
+    listaElement.innerHTML = '' 
+    for (nome of vetorNomes){ 
 
-        var nomeElement = document.createElement('li') //  cria os topicos     
-        var nomeText = document.createTextNode(nome)   //  aplica nos elementos do vetor      
+        var nomeElement = document.createElement('li')   
+        var nomeText = document.createTextNode(nome)      
 
-        var linkElement = document.createElement('a')  // distaca o excluir possibilitando ser clicado
+        var linkElement = document.createElement('a') 
         
-        linkElement.setAttribute('href', '#')          /* todo 'a' necessita obrigatoriamente de um href, a '#' evita q 
-                                                       o excluir tenha alguma acao ao ser clicado*/ 
+        linkElement.setAttribute('href', '#')         
         
-        var pos = vetorNomes.indexOf(nome)              // localiza o vetor
-        linkElement.setAttribute('onclick', 'deleteNome('+pos+')') // informa qual posicao esta sendo selecionada
+        var pos = vetorNomes.indexOf(nome)           
+        linkElement.setAttribute('onclick', 'deleteNome('+pos+')') 
 
-        var linkText = document.createTextNode('Excluir')  // texto em que o 'a' esta se referindo
+        var linkText = document.createTextNode('Excluir')  
        
-        linkElement.appendChild(linkText) // linkText recebe os atributos de linkElement 
+        linkElement.appendChild(linkText) 
 
 
         listaElement.appendChild(nomeElement)
@@ -48,14 +46,12 @@ function adicionar(){
 
 }
 function deleteNome(pos){
-    vetorNomes.splice(pos, 1) // funcao q exclui o elemento selecionado, vetor.splice(posicao, elemento) ali no caso vai excluir 
-                              // o primeiro elemento daquela posicao
-    saveToStorege()
+    vetorNomes.splice(pos, 1) 
     renderNomes()
 }
 
 function saveToStorege(){
-    localStorage.setItem('lista_nomes', JSON.stringify(vetorNomes)) // salva num repositorio local
+    localStorage.setItem('lista_nomes', JSON.stringify(vetorNomes)) 
 }
 
 
